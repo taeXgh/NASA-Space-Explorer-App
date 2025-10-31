@@ -23,6 +23,18 @@
         <p>Click "Fetch Space Images" to explore the cosmos!</p>
       </div>
     </div>
+      <!-- Modal for image details -->
+      <div id="modal" class="modal" aria-hidden="true">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+          <button class="modal-close" id="modalClose" aria-label="Close details">&times;</button>
+          <h2 id="modalTitle">Title</h2>
+          <img id="modalImage" src="" alt="" />
+          <p id="modalDate" class="muted"></p>
+          <p id="modalCopyright" class="muted"></p>
+          <p id="modalExplanation"></p>
+        </div>
+      </div>
   </div>
 
   <script src="js/script.js"></script>
