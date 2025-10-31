@@ -4,9 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NASA Space Explorer</title>
+  <!-- Prefer Inter; fall back to system fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+  <!-- Decorative star field (twinkling) -->
+  <div class="star-field" aria-hidden="true"></div>
   <div class="container">
     <header class="site-header">
       <img src="img/nasa-worm-logo.png" alt="NASA Logo" class="logo" />
@@ -36,6 +40,17 @@
         </div>
       </div>
   </div>
+
+  <!-- Footer: simple brand block (logo + title + short paragraph) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner container">
+      <img src="img/nasa-worm-logo.png" alt="NASA Logo" class="footer-logo" />
+      <div class="footer-text">
+        <h2>National Aeronautics and Space Administration</h2>
+        <p>NASA explores the unknown in air and space, innovates for the benefit of humanity, and inspires the world through discovery.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="js/script.js"></script>
 </body>

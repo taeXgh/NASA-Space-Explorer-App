@@ -5,7 +5,7 @@ const imgBtn = document.getElementById("getImageBtn");
 const display = document.getElementById("gallery");
 
 imgBtn.addEventListener('click', ()=>{
-  console.log('Getting an image...');
+  console.log('Getting images...');
 })
 // Modal elements
 const modal = document.getElementById('modal');
@@ -41,8 +41,8 @@ imgBtn.addEventListener('click', () => {
     return;
   }
 
-  const nine = apodImages.slice(0, 9);
-  renderGallery(nine);
+  // Render all image entries (remove the 9-image limit)
+  renderGallery(apodImages);
 });
 
 // Render gallery thumbnails
@@ -59,15 +59,23 @@ function renderGallery(items) {
     img.alt = item.title || 'NASA APOD image';
     img.loading = 'lazy';
 
-    const caption = document.createElement('p');
-    caption.textContent = item.title || '';
+  // Title and date under the thumbnail
+  const title = document.createElement('h3');
+  title.textContent = item.title || '';
+  title.style.fontSize = '16px';
+  title.style.marginTop = '10px';
 
-    // Clicking the image opens the modal with details
-    img.addEventListener('click', () => openModal(item));
+  const dateP = document.createElement('p');
+  dateP.textContent = item.date ? `Date: ${item.date}` : '';
+  dateP.className = 'muted';
 
-    card.appendChild(img);
-    card.appendChild(caption);
-    display.appendChild(card);
+  // Clicking the image opens the modal with details
+  img.addEventListener('click', () => openModal(item));
+
+  card.appendChild(img);
+  card.appendChild(title);
+  card.appendChild(dateP);
+  display.appendChild(card);
   });
 }
 
@@ -106,3 +114,45 @@ window.addEventListener('keydown', (e) => {
 
 // Helpful console log for debugging
 console.log('Script loaded.');
+
+// Create a decorative star field with twinkling stars
+function createStarField(count = 80) {
+  // Respect reduced motion
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const field = document.querySelector('.star-field');
+  if (!field) return;
+
+  for (let i = 0; i < count; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+
+    // Random position
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    star.style.left = left + '%';
+    star.style.top = top + '%';
+
+    // Random size between 1 and 4 px
+    const size = 1 + Math.random() * 3;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+
+    // Random twinkle duration and delay
+    const duration = 2 + Math.random() * 4; // 2s - 6s
+    const delay = Math.random() * 6; // 0 - 6s
+    star.style.animationDuration = prefersReduced ? '0s' : duration + 's';
+    star.style.animationDelay = prefersReduced ? '0s' : delay + 's';
+
+    // Slight variation in opacity
+    star.style.opacity = 0.4 + Math.random() * 0.7;
+
+    field.appendChild(star);
+  }
+}
+
+// Kick off star field after DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => createStarField(100));
+} else {
+  createStarField(100);
+}
